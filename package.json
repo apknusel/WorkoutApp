@@ -1,0 +1,19 @@
+{
+  "name": "workout_app",
+  "version": "1.0.0",
+  "description": "The application for my workout device",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apknusel/WorkoutApp.git"
+  },
+  "author": "Alex Knusel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/apknusel/WorkoutApp/issues"
+  },
+  "homepage": "https://github.com/apknusel/WorkoutApp#readme"
+}
