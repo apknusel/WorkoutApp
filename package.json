@@ -2,7 +2,7 @@
   "name": "workout_app",
   "version": "1.0.0",
   "description": "The application for my workout device",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/apknusel/WorkoutApp/issues"
   },
-  "homepage": "https://github.com/apknusel/WorkoutApp#readme"
+  "homepage": "https://github.com/apknusel/WorkoutApp#readme",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.1"
+  }
 }
