@@ -59,16 +59,40 @@ h1 {
     background-color: #dc3545;
 }
 
+/* Button styles */
 button {
     display: block;
     padding: 10px 20px;
-    background-color: #007BFF;
-    color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    background-color: #007BFF;
+    color: white;
 }
 
-button:hover {
-    background-color: #0056b3;
+#connectButton {
+    background-color: #007BFF; /* Blue when not connected */
+    color: white;
+}
+
+#connectButton.connected {
+    background-color: #28a745; /* Green when connected */
+}
+
+#connectButton.connected:hover {
+    background-color: #dc3545; /* Red when hovered and connected */
+}
+
+.ble-connection {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.ble-connection label,
+.ble-connection input,
+.ble-connection button,
+.ble-connection p {
+    margin: 0;
 }

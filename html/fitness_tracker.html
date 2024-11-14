@@ -11,12 +11,19 @@
 <body>
     <div class="container">
         <h1>Fitness Tracker</h1>
+
+        <!-- BLE Connection Section -->
+        <div class="ble-connection">
+            <label for="deviceName">Device Name:</label>
+            <input type="text" id="deviceName" placeholder="Enter device name" />
+            <button id="connectButton">Connect</button>
+        </div>
         
         <!-- Column headers (labels) -->
         <div class="exercise header">
             <div class="label">Exercise</div>
             <div class="label">Reps</div>
-            <div class="label">% of Max</div>
+            <div class="label">Difficulty</div>
             <div class="label">Avg Heart Rate</div>
             <div class="label">Blood Oxygen</div>
             <div class="label">Time</div>
