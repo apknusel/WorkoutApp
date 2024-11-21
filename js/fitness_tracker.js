@@ -58,8 +58,13 @@ function disconnect() {
 }
 
 function handleCharacteristicValueChanged(event) {
-    const value = event.target.value.getUint8(0);
+    const value = event.target.value.getUint16(0);
     receivedData.push(value)
+    if (receivedData.length === 4) {
+        console.log(receivedData);
+        updateFields(receivedData[0], receivedData[1], receivedData[2], receivedData[3]);
+        receivedData = [];
+    }
     console.log(`Data Received: ${value}`);
 }
 
@@ -70,17 +75,25 @@ function addExercise() {
     exerciseDiv.innerHTML = `
       <input type="text" placeholder="Exercise">
       <input type="number" placeholder="Reps">
-      <input type="number" disabled>
-      <input type="number" disabled>
-      <input type="number" disabled>
       <input type="text" disabled>
-      <button onclick="toggleSelect(this)"> Select </button>
+      <input type="text" disabled>
+      <input type="text" disabled>
+      <input type="text" disabled>
+      <button onclick="toggleSelect(this)">Select</button>
     `;
 
     document.getElementById('exercises').appendChild(exerciseDiv);
 }
 
 function toggleSelect(button) {
+    // Deselect any previously selected button
+    const previouslySelected = document.querySelector('.selected');
+    if (previouslySelected && previouslySelected !== button) {
+        previouslySelected.classList.remove('selected');
+        previouslySelected.textContent = 'Select';
+    }
+
+    // Toggle the current button
     if (button.classList.contains('selected')) {
         button.classList.remove('selected');
         button.textContent = 'Select';
@@ -91,7 +104,12 @@ function toggleSelect(button) {
 }
 
 function updateFields(difficulty, avg_heart_rate, blood_oxygen, time) {
-    const exerciseDiv = repsInput.parentElement;
+    const selectedButton = document.querySelector('.selected');
+    if (!selectedButton) {
+        console.error('No exercise selected');
+        return;
+    }
+    const exerciseDiv = selectedButton.parentElement;
 
     exerciseDiv.children[2].value = `${difficulty}%`;
     exerciseDiv.children[3].value = `${avg_heart_rate}bpm`;
@@ -103,7 +121,6 @@ function formatTime(milliseconds) {
     const totalSeconds = Math.floor(milliseconds / 1000);
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
-    const millisecondsPart = milliseconds % 1000;
 
-    return `${minutes}:${seconds.toString().padStart(2, '0')}.${millisecondsPart.toString().padStart(3, '0').slice(0, 2)}`;
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 }
