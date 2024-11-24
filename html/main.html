@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>BLE Connection to ATmega3208</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Add this line -->
     <script src="js/main.js" async defer></script>
-    <style src="css/main.css"></style>
 </head>
 
 <body>
@@ -15,6 +15,7 @@
     <button id="connectButton">Connect</button>
     <p id="status">Status: Disconnected</p>
     <p id="data">Accelerometer Data: None</p>
+    <canvas id="dataChart" width="400" height="200"></canvas> <!-- Add this line -->
 </body>
 
 </html>

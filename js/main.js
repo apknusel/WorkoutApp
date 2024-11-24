@@ -2,12 +2,37 @@ const connectButton = document.getElementById('connectButton');
 const statusDisplay = document.getElementById('status');
 const dataDisplay = document.getElementById('data');
 const deviceNameInput = document.getElementById('deviceName');
+const dataChartCtx = document.getElementById('dataChart').getContext('2d');
 
 const SERVICE_UUID = 0x1826;
 const CHARACTERISTIC_UUID = 0x2AD2;
 
 let bleDevice = null;
 let characteristic = null;
+let dataPoints = [];
+
+// Initialize Chart.js
+const dataChart = new Chart(dataChartCtx, {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [{
+            label: 'BLE Data',
+            data: [],
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1,
+            fill: false
+        }]
+    },
+    options: {
+        scales: {
+            x: {
+                type: 'linear',
+                position: 'bottom'
+            }
+        }
+    }
+});
 
 connectButton.addEventListener('click', async () => {
     if (bleDevice) {
@@ -61,4 +86,12 @@ function handleCharacteristicValueChanged(event) {
     const value = event.target.value.getUint8(0);
     let text = `Data Received: ${value}`;
     dataDisplay.textContent = `BLE Data: ${text}`;
+
+    // Append the data to the dataPoints array
+    dataPoints.push(value);
+
+    // Update the chart
+    dataChart.data.labels.push(dataPoints.length); // X-axis label
+    dataChart.data.datasets[0].data.push(value); // Y-axis data
+    dataChart.update();
 }
