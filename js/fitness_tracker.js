@@ -60,12 +60,12 @@ function disconnect() {
 function handleCharacteristicValueChanged(event) {
     const value = event.target.value.getUint16(0);
     receivedData.push(value)
+    console.log(`Data Received: ${value}`);
     if (receivedData.length === 4) {
         console.log(receivedData);
         updateFields(receivedData[0], receivedData[1], receivedData[2], receivedData[3]);
         receivedData = [];
     }
-    console.log(`Data Received: ${value}`);
 }
 
 function addExercise() {
@@ -117,8 +117,7 @@ function updateFields(difficulty, avg_heart_rate, blood_oxygen, time) {
     exerciseDiv.children[5].value = formatTime(time);
 }
 
-function formatTime(milliseconds) {
-    const totalSeconds = Math.floor(milliseconds / 1000);
+function formatTime(totalSeconds) {
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
 
